@@ -1,0 +1,23 @@
+{
+  "name": "advanced_backbone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mamedov-rustam/advanced_backbone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mamedov-rustam/advanced_backbone/issues"
+  },
+  "homepage": "https://github.com/mamedov-rustam/advanced_backbone#readme"
+}
