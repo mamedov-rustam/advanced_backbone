@@ -7,6 +7,10 @@ define(function (require) {
         _isFunction = require('lodash/lang/isFunction');
 
     return {
+        renderEl: function (template, model) {
+            var el = this.render(template, model);
+            return $(el);
+        },
         render: function (template, model) {
             if (!wasRegistred(template)) {
                 registerTemplate(template);
@@ -30,7 +34,7 @@ define(function (require) {
     };
 
     function renderRegistredTemplate(template, model, success) {
-        var result;
+        var result = '';
         dust.render(template, model, (err, output) => {
             if (err) {
                 throw err;

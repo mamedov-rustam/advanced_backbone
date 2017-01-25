@@ -1,7 +1,8 @@
 define(function (require) {
     'use strict';
 
-    var _uniqueId = require('lodash/utility/uniqueId');
+    var _uniqueId = require('lodash/utility/uniqueId'),
+        _map = require('lodash/collection/map');
 
     return {
         generateContacts: generateContacts
@@ -12,7 +13,7 @@ define(function (require) {
         var groups = ['Job', 'Family', 'Friends'];
 
         var counter = 0;
-        return _.map(names, name => {
+        return _map(names, name => {
             return {
                 id: _uniqueId(),
                 name: name,

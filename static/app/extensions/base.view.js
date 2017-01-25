@@ -5,13 +5,14 @@ define(function (require) {
         _isFunction = require('lodash/lang/isFunction');
 
     return Backbone.View.extend({
-        getData: function () {
+        renderData: function () {
             var dataModel = this.model || this.collection;
-            return dataModel && _isFunction(dataModel.toJSON) ? dataModel.toJSON() : {};
+            return dataModel && _isFunction(dataModel.toJSON) ? dataModel.toJSON() : dataModel;
         },
         render: function () {
-            var html = TemplateManager.render(this.template, this.getData());
+            var html = TemplateManager.render(this.template, this.renderData());
             this.$el.html(html);
+            this.postRender && this.postRender();
 
             return this;
         },

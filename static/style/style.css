@@ -1,3 +1,15 @@
 body {
-	padding-top: 100px;
+	margin-top: 100px;
+}
+
+.add-new-contact-btn {
+	margin-right: 15px;
+}
+
+.margin-b-xs {
+	margin-bottom: 15px;
+}
+
+.margin-t-xs {
+	margin-top: 15px;
 }

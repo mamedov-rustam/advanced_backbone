@@ -6,11 +6,12 @@ define((require) => {
             TemplateManager = require('TemplateManager'),
             $ = require('jquery'),
             $dialog = require('jquery-ui/widgets/dialog'), // need for $.dialog
-            viewTemplate = require('text!/app/templates/contact.collection.item.dust');
+            contactViewTemplate = require('text!/app/templates/contact.collection.item.dust'),
+            deleteContactModalTemplate = require('text!/app/templates/delete.contact.confirm.modal.dust');
 
         return BaseView.extend({
             model: ContactModel,
-            template: viewTemplate,
+            template: contactViewTemplate,
             events: {
                 'click #delete-btn': 'confirmDeleting'
             },
@@ -20,24 +21,23 @@ define((require) => {
                 var self = this;
                 var $modalEl = $('<div/>');
                 $modalEl.attr('title', 'Delete Confirmation');
+                $modalEl = TemplateManager.renderEl(deleteContactModalTemplate, this.model.toJSON());
 
-                TemplateManager.renderAsync('/app/templates/delete.contact.confirm.modal', this.model.toJSON(), ($modalEl) => {
-                    $modalEl.dialog({
-                        resizable: false,
-                        height: "auto",
-                        width: 400,
-                        modal: true,
-                        buttons: {
-                            'Delete': function () {
-                                self.model.destroy();
-                                self.remove();
-                                $(this).dialog("close");
-                            },
-                            'Cancel': function () {
-                                $(this).dialog("close");
-                            }
+                $modalEl.dialog({
+                    resizable: false,
+                    height: "auto",
+                    width: 400,
+                    modal: true,
+                    buttons: {
+                        'Delete': function () {
+                            self.model.destroy();
+                            self.remove();
+                            $(this).dialog("close");
+                        },
+                        'Cancel': function () {
+                            $(this).dialog("close");
                         }
-                    });
+                    }
                 });
             }
         });
