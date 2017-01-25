@@ -1,4 +1,6 @@
 define(function (require) {
+    'use strict';
+
     var _uniqueId = require('lodash/utility/uniqueId');
 
     return {

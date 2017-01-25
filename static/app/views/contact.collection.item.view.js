@@ -1,4 +1,6 @@
 define((require) => {
+        'use strict';
+
         var BaseView = require('BaseView'),
             ContactModel = require('ContactModel'),
             TemplateManager = require('TemplateManager'),

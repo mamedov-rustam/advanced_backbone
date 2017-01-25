@@ -1,4 +1,6 @@
 define(function (require) {
+    'use strict';
+
     var dust = require('dust'),
         $ = require('jquery'),
         _endsWith = require('lodash/string/endsWith'),
