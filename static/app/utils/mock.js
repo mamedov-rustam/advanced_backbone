@@ -1,20 +1,22 @@
-define(['lodash'], function (_) {
-	return {
-		generateContacts: generateContacts
-	}
+define(function (require) {
+    var _uniqueId = require('lodash/utility/uniqueId');
 
-	function generateContacts() {
-		var names = ['John', 'Oleg', 'Jack', 'Petr', 'Ivan', 'Sergey', 'Vitaliy', 'Svetlana'];
-		var groups = ['Job', 'Family', 'Friends'];
+    return {
+        generateContacts: generateContacts
+    };
 
-		var counter = 0;
-		return _.map(names, name => {
-			return {
-				id: _.uniqueId(),
-				name: name,
-				phone: Math.random().toString(10).substring(7),
-				group: groups[counter++ % groups.length]
-			}
-		});
-	}
+    function generateContacts() {
+        var names = ['John', 'Oleg', 'Jack', 'Petr', 'Ivan', 'Sergey', 'Vitaliy', 'Svetlana'];
+        var groups = ['Job', 'Family', 'Friends'];
+
+        var counter = 0;
+        return _.map(names, name => {
+            return {
+                id: _uniqueId(),
+                name: name,
+                phone: Math.random().toString(10).substring(7),
+                group: groups[counter++ % groups.length]
+            }
+        });
+    }
 });

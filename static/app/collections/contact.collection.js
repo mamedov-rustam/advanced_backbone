@@ -1,5 +1,10 @@
-define(['Backbone', 'ContactModel'], (Backbone, ContactModel) => {
-	return Backbone.Collection.extend({
-		model: ContactModel
-	});
+define((require) => {
+    'use strict';
+
+    var Backbone = require('Backbone'),
+        ContactModel = require('ContactModel');
+
+    return Backbone.Collection.extend({
+        model: ContactModel
+    });
 });
