@@ -2,7 +2,6 @@ define.amd.dust = true; // need for the dust lib
 require.config({
 	paths: {
         // Vendor
-        'lodash': '/vendor/lodash/lodash.min',
         'jquery': '/vendor/jquery/jquery.min',
         'jquery-ui': '/vendor/jquery-ui/jquery-ui.min',
         'bootstrap': '/vendor/bootstrap/js/bootstrap.min',
@@ -25,6 +24,10 @@ require.config({
     shim : {
         "bootstrap" : { "deps" :['jquery'] }
     },
+    packages: [{
+        name: 'lodash',
+        location: '../vendor/lodash-amd/modern'
+    }]
 });
 
 require(['Mock', 'ContactCollection', 'ContactCollectionView', 'TemplateManager', 'jquery'], 
