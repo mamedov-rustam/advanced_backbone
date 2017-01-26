@@ -8,11 +8,10 @@ define((require) => {
         template = require('text!/app/templates/home.page.dust');
 
     return BaseView.extend({
-        el: '#main',
         template: template,
-        initialize: function () {
+        initialize: function (opts) {
             var contactCollection = new ContactCollection(window.contacts);
-            this.contactCollectionView = new ContactCollectionView({collection: contactCollection});
+            this.contactCollectionView = new ContactCollectionView({collection: contactCollection, router: opts.router});
             this.headerView = new HomePageHeaderView();
         },
         postRender: function () {

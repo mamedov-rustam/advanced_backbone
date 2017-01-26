@@ -5,9 +5,10 @@
         <h3>{name}</h3>
         <p>Phone: {phone}</p>
         <p>Group: {group}</p>
-        <p>
+        <div class="btn-group">
+        	<button id='edit-btn' class="btn btn-info" role="button">Edit</button>
         	<button id='delete-btn' class="btn btn-danger" role="button">Delete</button>
-    	</p>
+    	</div>
       </div>
     </div>
 </div>

@@ -4,6 +4,7 @@ define((require) => {
         var BaseView = require('BaseView'),
             ContactModel = require('ContactModel'),
             TemplateManager = require('TemplateManager'),
+            _remove = require('lodash/array/remove'),
             $ = require('jquery'),
             $dialog = require('jquery-ui/widgets/dialog'), // need for $.dialog
             contactViewTemplate = require('text!/app/templates/contact.collection.item.dust'),
@@ -13,7 +14,12 @@ define((require) => {
             model: ContactModel,
             template: contactViewTemplate,
             events: {
-                'click #delete-btn': 'confirmDeleting'
+                'click #delete-btn': 'confirmDeleting',
+                'click #edit-btn': 'navigateToContactEditForm'
+            },
+
+            initialize: function(opts) {
+                this.router = opts.router;
             },
 
             // ToDo: create component for modal windows
@@ -30,6 +36,7 @@ define((require) => {
                     modal: true,
                     buttons: {
                         'Delete': function () {
+                            _remove(window.contacts, self.model.toJSON());
                             self.model.destroy();
                             self.remove();
                             $(this).dialog("close");
@@ -39,6 +46,10 @@ define((require) => {
                         }
                     }
                 });
+            },
+
+            navigateToContactEditForm: function() {
+                this.router.navigate('contacts/' + this.model.get('id'), {trigger: true})
             }
         });
     }

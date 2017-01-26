@@ -10,7 +10,9 @@ require.config({
         // Custom
         'Mock': '/app/utils/mock',
         'TemplateManager': '/app/utils/template.manager',
+        'ModelValidator': '/app/extensions/model.validator',
         'BaseView': '/app/extensions/base.view',
+        'BaseModel': '/app/extensions/base.model',
         'ContactModel': '/app/models/contact.model',
         'ContactCollection': '/app/collections/contact.collection',
         'ContactCollectionView': '/app/views/contact.collection.view',

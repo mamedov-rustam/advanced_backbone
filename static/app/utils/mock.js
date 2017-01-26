@@ -17,7 +17,7 @@ define(function (require) {
             return {
                 id: _uniqueId(),
                 name: name,
-                phone: Math.random().toString(10).substring(7),
+                phone: Math.random().toString().substring(2, 12),
                 group: groups[counter++ % groups.length]
             }
         });
