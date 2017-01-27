@@ -18,13 +18,13 @@ define((require) => {
 
         allContacts: function() {
             this.currentView && this.currentView.remove();
-            this.currentView = new HomePageView({router: this}).render();
+            this.currentView = new HomePageView({router: this});
             this.renderCurrentView();
         },
 
         newContact: function() {
             this.currentView && this.currentView.remove();
-            this.currentView = new ContactFormView({router: this}).render();
+            this.currentView = new ContactFormView({router: this});
             this.renderCurrentView();
         },
 

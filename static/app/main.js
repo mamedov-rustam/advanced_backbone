@@ -16,6 +16,7 @@ require.config({
         'ContactModel': '/app/models/contact.model',
         'ContactCollection': '/app/collections/contact.collection',
         'ContactCollectionView': '/app/views/contact.collection.view',
+        'ContactCollectionPaginationView': '/app/views/contact.collection.pagination.view',
         'ContactCollectionItemView': '/app/views/contact.collection.item.view',
         'HomePageView': '/app/views/home.page.view',
         'HomePageHeaderView': '/app/views/home.page.header.view',

@@ -21,6 +21,7 @@ define(function (require) {
             return this;
         },
         clear: function () {
+            this._removeSubViews();
             this.$el.html('');
         },
         remove: function() {
