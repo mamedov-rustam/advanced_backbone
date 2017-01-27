@@ -24,7 +24,8 @@ define((require) => {
             'submit #contact-form': 'submit'
         },
 
-        submit: function() {
+        submit: function(e) {
+            e.preventDefault();
             this.hideErrors();
 
             _forIn(this.model.toJSON(), (value, key) => {
