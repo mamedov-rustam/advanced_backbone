@@ -13,10 +13,11 @@ define((require) => {
             var contactCollection = new ContactCollection(window.contacts);
             this.contactCollectionView = new ContactCollectionView({collection: contactCollection, router: opts.router});
             this.headerView = new HomePageHeaderView();
+            this.registerSubViews([this.contactCollectionView, this.headerView]);
         },
         postRender: function () {
-            this.$el.find('#home-header').append(this.headerView.render().$el);
-            this.$el.find('#home-main').append(this.contactCollectionView.render().$el);
+            this.$('#home-header').html(this.headerView.render().$el);
+            this.$('#home-main').html(this.contactCollectionView.render().$el);
         }
     });
 });
