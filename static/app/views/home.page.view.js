@@ -16,8 +16,7 @@ define((require) => {
             var contactCollection = new ContactCollection(window.contacts);
             this.contactCollectionView = new ContactCollectionView({
                 parentView: this,
-                collection: contactCollection,
-                router: opts.router
+                collection: contactCollection
             });
 
             this.contactCollectionPaginationView = new ContactCollectionPaginationView({parentView: this});

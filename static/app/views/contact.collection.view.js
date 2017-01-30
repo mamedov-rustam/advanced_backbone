@@ -13,7 +13,6 @@ define((require) => {
         currentSearchQuery: '',
 
         initialize: function(opts) {
-            this.router = opts.router;
             this.parentView = opts.parentView;
             this.parentView.on('contacts:search', this.search, this);
             this.parentView.on('contacts:page', this.changePage, this);
@@ -57,7 +56,7 @@ define((require) => {
             }
 
             this.collection.each((model) => {
-                var view = new ContactCollectionItemView({model: model, router: this.router});
+                var view = new ContactCollectionItemView({model: model});
                 this.registerSubViews([view]);
                 this.$el.append(view.render().$el);
             });

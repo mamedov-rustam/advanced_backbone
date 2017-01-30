@@ -14,8 +14,7 @@ define((require) => {
             model: ContactModel,
             template: contactViewTemplate,
             events: {
-                'click #delete-btn': 'confirmDeleting',
-                'click #edit-btn': 'navigateToContactEditForm'
+                'click #delete-btn': 'confirmDeleting'
             },
 
             initialize: function(opts) {
@@ -46,10 +45,6 @@ define((require) => {
                         }
                     }
                 });
-            },
-
-            navigateToContactEditForm: function() {
-                this.router.navigate('contacts/' + this.model.get('id'), {trigger: true})
             }
         });
     }

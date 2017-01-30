@@ -14,8 +14,6 @@ define((require) => {
         template: template,
 
         initialize: function(opts) {
-            this.router = opts.router;
-
             var modelData = _find(window.contacts, {id: opts.contactId}) || {};
             this.model = new ContactModel(modelData);
         },
@@ -46,7 +44,7 @@ define((require) => {
                     window.contacts.push(this.model.toJSON());
                 }
 
-                this.router.navigate('contacts', {trigger: true, replace: true});
+                Backbone.history.navigate('contacts', {trigger: true, replace: true});
             } else {
                 this.showErrors();
             }

@@ -6,8 +6,8 @@
         <p>Phone: {phone}</p>
         <p>Group: {group}</p>
         <div class="btn-group">
-        	<button id='edit-btn' class="btn btn-info" role="button">Edit</button>
-        	<button id='delete-btn' class="btn btn-danger" role="button">Delete</button>
+        	<a href="#contacts/{id}" id='edit-btn' class="btn btn-info" role="button">Edit</a>
+        	<a id='delete-btn' class="btn btn-danger" role="button">Delete</a>
     	</div>
       </div>
     </div>

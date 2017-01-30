@@ -24,13 +24,13 @@ define((require) => {
 
         newContact: function() {
             this.currentView && this.currentView.remove();
-            this.currentView = new ContactFormView({router: this});
+            this.currentView = new ContactFormView();
             this.renderCurrentView();
         },
 
         editContact: function(contactId) {
             this.currentView && this.currentView.remove();
-            this.currentView = new ContactFormView({contactId: contactId, router: this});
+            this.currentView = new ContactFormView({contactId: contactId});
             this.renderCurrentView();
         },
 
