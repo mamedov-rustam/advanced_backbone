@@ -13,6 +13,8 @@ require.config({
         'ModelValidator': '/app/extensions/model.validator',
         'BaseView': '/app/extensions/base.view',
         'BaseModel': '/app/extensions/base.model',
+        'BaseRouter': '/app/extensions/base.router',
+        'ContactController': '/app/controller/contact.controller',
         'ContactModel': '/app/models/contact.model',
         'ContactCollection': '/app/collections/contact.collection',
         'ContactCollectionView': '/app/views/contact.collection.view',
@@ -45,9 +47,7 @@ require.config({
 
 require(['Mock', 'ContactRouter'],
     function (Mock, ContactRouter) {
-        var contacts = Mock.generateContacts();
-        window.contacts = contacts;
-
+        window.contacts = Mock.generateContacts();
         new ContactRouter();
     }
 );
