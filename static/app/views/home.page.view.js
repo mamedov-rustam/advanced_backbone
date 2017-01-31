@@ -4,29 +4,22 @@ define((require) => {
     var BaseView = require('BaseView'),
         HomePageHeaderView = require('HomePageHeaderView'),
         ContactCollectionView = require('ContactCollectionView'),
-        ContactCollectionPaginationView = require('ContactCollectionPaginationView'),
-        ContactCollection = require('ContactCollection'),
         template = require('text!/app/templates/home.page.dust');
 
     return BaseView.extend({
         template: template,
-        initialize: function (opts) {
-            this.headerView = new HomePageHeaderView({parentView: this});
 
-            var contactCollection = new ContactCollection(window.contacts);
-            this.contactCollectionView = new ContactCollectionView({
-                parentView: this,
-                collection: contactCollection
-            });
+        initialize: function () {
+            this.contactCollectionView = new ContactCollectionView();
+            this.headerView = new HomePageHeaderView();
+            this.headerView.on('contacts:search', this.contactCollectionView.search, this.contactCollectionView);
 
-            this.contactCollectionPaginationView = new ContactCollectionPaginationView({parentView: this});
-
-            this.registerSubViews([this.contactCollectionView, this.headerView]);
+            this.registerSubViews(this.headerView, this.contactCollectionView);
         },
+
         postRender: function () {
             this.$('#home-header').html(this.headerView.render().$el);
             this.$('#home-main').html(this.contactCollectionView.render().$el);
-            this.$('#home-footer').html(this.contactCollectionPaginationView.render().$el);
         }
     });
 });

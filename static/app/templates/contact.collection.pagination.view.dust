@@ -1,4 +1,4 @@
-{?isDataPresented}
+{?needToShow}
     <ul class="pagination pull-right">
         {#pages}
             <li id="page" class="{?isActive}active{/isActive}" data-number="{number}">
@@ -6,4 +6,4 @@
             </li>
         {/pages}
     </ul>
-{/isDataPresented}
+{/needToShow}

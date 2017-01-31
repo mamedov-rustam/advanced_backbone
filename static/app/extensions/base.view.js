@@ -28,8 +28,8 @@ define(function (require) {
             this._removeSubViews();
             Backbone.View.prototype.remove.apply(this, arguments);
         },
-        registerSubViews: function(subViews) {
-            this._subViews = _union(this._subViews, subViews);
+        registerSubViews: function() {
+            this._subViews = _union(this._subViews, arguments);
         },
         _removeSubViews: function() {
             _forEach(this._subViews, (view) => view.remove());

@@ -2,7 +2,10 @@ define((require) => {
     'use strict';
 
     var BaseView = require('BaseView'),
+        ContactCollection = require('ContactCollection'),
         ContactCollectionItemView = require('ContactCollectionItemView'),
+        ContactCollectionPaginationView = require('ContactCollectionPaginationView'),
+        template = require('text!/app/templates/contact.collection.dust'),
         _filter = require('lodash/collection/filter'),
         _findIndex = require('lodash/array/findIndex'),
         _isString = require('lodash/lang/isString'),
@@ -10,31 +13,42 @@ define((require) => {
         _chunk = require('lodash/array/chunk');
 
     return BaseView.extend({
+        template: template,
+
+        itemsPerPage: 6,
+
         currentSearchQuery: '',
 
-        initialize: function(opts) {
-            this.parentView = opts.parentView;
-            this.parentView.on('contacts:search', this.search, this);
-            this.parentView.on('contacts:page', this.changePage, this);
+        initialize: function () {
+            this.contactCollectionPaginationView = new ContactCollectionPaginationView({itemsPerPage: this.itemsPerPage});
+            this.contactCollectionPaginationView.on('page:change', this.onPageChanged, this);
+
+            this.registerSubViews(this.contactCollectionPaginationView);
+
+            this.collection = new ContactCollection();
+            this.onPageChanged({number: 1}); // Fetch emulation
+            this.collection.on('update', () => this.onPageChanged());
         },
 
-        changePage: function(pageConfig) {
-            var page = pageConfig.number - 1;
-            var itemsPerPage = pageConfig.itemsPerPage || 3;
-
+        onPageChanged: function (page) {
             var models = this.findContactsByCurrentSearchQuery();
-            var modelsByPages = _chunk(models, itemsPerPage);
+            var modelsByPages = _chunk(models, this.itemsPerPage);
 
-            pageConfig.callback && pageConfig.callback(modelsByPages.length);
-            this.resetCollection(modelsByPages[page]);
+            page = (page && page.number) || this.contactCollectionPaginationView.pagination.activePage;
+            if (!modelsByPages[page - 1]) {
+                page = page - 1;
+            }
+
+            this.contactCollectionPaginationView.setPaginationParams(page, modelsByPages.length);
+            this.resetCollection(modelsByPages[page - 1]);
         },
 
-        search: function(searchQuery) {
+        search: function (searchQuery) {
             this.currentSearchQuery = searchQuery;
-            this.changePage({number: 1});
+            this.onPageChanged({number: 1});
         },
 
-        findContactsByCurrentSearchQuery: function() {
+        findContactsByCurrentSearchQuery: function () {
             return _filter(window.contacts, (contact) => {
                 var index = _findIndex(Object.values(contact), val => {
                     var strVal = _isNumber(val) || _isString(val) ? val.toString() : '';
@@ -44,22 +58,26 @@ define((require) => {
             });
         },
 
-        resetCollection: function(collection) {
+        resetCollection: function (collection) {
             this.collection.reset(collection);
             this.render();
         },
 
-        render: function () {
-            this.clear();
+        postRender: function () {
+            var $content = this.$('#content');
+
             if (this.collection.isEmpty()) {
-                this.$el.html('<h1 class="text-center">Sorry, nothing to show...</h1>');
+                $content.html('<h1 class="text-center">Sorry, nothing to show...</h1>');
+                return;
             }
 
             this.collection.each((model) => {
                 var view = new ContactCollectionItemView({model: model});
-                this.registerSubViews([view]);
-                this.$el.append(view.render().$el);
+                this.registerSubViews(view);
+                $content.append(view.render().$el);
             });
+
+            this.contactCollectionPaginationView.setElement(this.$('#pagination')).render();
 
             return this;
         },
