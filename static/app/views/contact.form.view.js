@@ -41,7 +41,7 @@ define((require) => {
                     _assign(oldModel, this.model.toJSON());
                 } else {
                     this.model.set('id', _uniqueId());
-                    window.contacts.push(this.model.toJSON());
+                    window.contacts.unshift(this.model.toJSON());
                 }
 
                 Backbone.history.navigate('contacts', {trigger: true, replace: true});
