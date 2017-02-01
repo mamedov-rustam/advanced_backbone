@@ -17,10 +17,6 @@ define((require) => {
                 'click #delete-btn': 'confirmDeleting'
             },
 
-            initialize: function(opts) {
-                this.router = opts.router;
-            },
-
             // ToDo: create component for modal windows
             confirmDeleting: function () {
                 var self = this;
