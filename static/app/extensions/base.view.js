@@ -9,9 +9,9 @@ define(function (require) {
 
     return Backbone.View.extend({
 
-        constructor(options) {
+        constructor() {
             this._subViews = [];
-            Backbone.View.apply(this, [options]);
+            Backbone.View.apply(this, arguments);
         },
 
         renderData() {
