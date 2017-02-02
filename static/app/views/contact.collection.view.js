@@ -26,11 +26,11 @@ define((require) => {
             this.registerSubViews(this.contactCollectionPaginationView);
 
             this.collection = new ContactCollection();
-            this.onPageChanged({number: 1}); // Fetch emulation
+            this.onPageChanged({number: 1}, {silent: true}); // Fetch emulation
             this.collection.on('update', () => this.onPageChanged());
         },
 
-        onPageChanged: function (page) {
+        onPageChanged: function (page, opts) {
             var models = this.findContactsByCurrentSearchQuery();
             var modelsByPages = _chunk(models, this.itemsPerPage);
 
@@ -40,7 +40,7 @@ define((require) => {
             }
 
             this.contactCollectionPaginationView.setPaginationParams(page, modelsByPages.length);
-            this.resetCollection(modelsByPages[page - 1]);
+            this.resetCollection(modelsByPages[page - 1], opts);
         },
 
         search: function (searchQuery) {
@@ -58,12 +58,19 @@ define((require) => {
             });
         },
 
-        resetCollection: function (collection) {
+        resetCollection: function (collection, opts) {
+            opts = opts || {};
+
             this.collection.reset(collection);
-            this.render();
+
+            if (!opts.silent) {
+                this.render();
+            }
         },
 
         postRender: function () {
+            this._removeSubViews();
+
             var $content = this.$('#content');
 
             if (this.collection.isEmpty()) {
@@ -78,6 +85,7 @@ define((require) => {
             });
 
             this.contactCollectionPaginationView.setElement(this.$('#pagination')).render();
+            this.registerSubViews(this.contactCollectionPaginationView);
 
             return this;
         },
