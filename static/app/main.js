@@ -1,12 +1,12 @@
 define.amd.dust = true; // need for the dust lib
 require.config({
     paths: {
-        // Vendor
-        'jquery': '/vendor/jquery/jquery.min',
-        'bootstrap': '/vendor/bootstrap/js/bootstrap.min',
-        'Backbone': '/vendor/backbone/backbone',
-        'dust': '/vendor/dustjs-linkedin/dust-full.min',
-        'text': '/vendor/text/text',
+        // bower_components
+        'jquery': '/bower_components/jquery/dist/jquery.min',
+        'bootstrap': '/bower_components/bootstrap/js/bootstrap.min',
+        'Backbone': '/bower_components/backbone/backbone',
+        'dust': '/bower_components/dustjs-linkedin/dist/dust-full.min',
+        'text': '/bower_components/text/text',
         // Custom
         'Mock': '/app/utils/mock',
         'TemplateManager': '/app/utils/template.manager',
@@ -37,11 +37,11 @@ require.config({
     packages: [
         {
             name: 'lodash',
-            location: '/vendor/lodash-amd/modern'
+            location: '/bower_components/lodash-amd/modern'
         },
         {
             name: 'jquery-ui',
-            location: '/vendor/jquery-ui/ui'
+            location: '/bower_components/jquery-ui/ui'
         }
     ]
 });
