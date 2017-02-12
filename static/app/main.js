@@ -14,6 +14,7 @@ require.config({
         'BaseView': '/app/extensions/base.view',
         'BaseModel': '/app/extensions/base.model',
         'BaseRouter': '/app/extensions/base.router',
+        'ModalView': '/app/utils/modal.view',
         'ContactController': '/app/controller/contact.controller',
         'ContactModel': '/app/models/contact.model',
         'ContactCollection': '/app/collections/contact.collection',
