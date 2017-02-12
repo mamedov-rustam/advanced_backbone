@@ -14,9 +14,6 @@ define(function (require) {
             this.$el.html(html);
 
             return this;
-        },
-        clear: function () {
-            this.$el.html('');
         }
     });
 });
