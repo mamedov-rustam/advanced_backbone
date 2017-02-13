@@ -9,7 +9,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "postInstall": "bower install",
+    "postinstall": "bower install",
     "start": "node server.js"
   },
   "repository": {
