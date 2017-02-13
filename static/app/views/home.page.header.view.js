@@ -6,8 +6,8 @@ define((require) => {
 
     return BaseView.extend({
         template: template,
-        postRender: function() {
-            this.$el.on('submit #search-form', (e) => this.search(e)); // ToDo: investigate why 'events' object doesn't work as expected
+        events: {
+            'submit #search-form': 'search'
         },
         search: function(e) {
             e.preventDefault();
