@@ -2,7 +2,7 @@ define.amd.dust = true; // need for the dust lib
 require.config({
     paths: {
         // Vendor
-        'jquery': '/vendor/jquery/dist/jquery.min',
+        'jquery': '/vendor/jquery/jquery.min',
         'bootstrap': '/vendor/bootstrap/js/bootstrap.min',
         'Backbone': '/vendor/backbone/backbone',
         'dust': '/vendor/dustjs-linkedin/dust-full.min',
