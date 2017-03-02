@@ -12,7 +12,7 @@ define((require) => {
         initialize: function () {
             this.contactCollectionView = new ContactCollectionView();
             this.headerView = new HomePageHeaderView();
-            this.headerView.on('contacts:search', this.contactCollectionView.search, this.contactCollectionView);
+            this.listenTo(this.headerView, 'contacts:search', (query) => this.contactCollectionView.search(query));
 
             this.registerSubViews(this.headerView, this.contactCollectionView);
         },

@@ -16,29 +16,27 @@ define((require) => {
                 'click #delete-btn': 'confirmDeleting'
             },
 
-            initialize() {
+            confirmDeleting() {
                 var self = this;
-                // We don't need to register modal window as subview
-                this.deleteConfirmationModal = new ModalView({
+
+                var modalView = new ModalView({
                     title: 'Confirm deleting',
                     template: deleteContactModalTemplate,
                     model: self.model,
                     buttons: {
                         'Delete': function () {
                             _remove(window.contacts, self.model.toJSON());
-                            self.model.destroy();
-                            self.remove();
                             $(this).dialog("close");
+                            self.model.destroy();
                         },
                         'Cancel': function () {
                             $(this).dialog("close");
+                            modalView.remove();
                         }
                     }
                 });
-            },
 
-            confirmDeleting() {
-                this.deleteConfirmationModal.render().show();
+                modalView.render().show();
             }
         });
     }

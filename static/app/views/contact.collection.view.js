@@ -21,13 +21,11 @@ define((require) => {
 
         initialize: function () {
             this.contactCollectionPaginationView = new ContactCollectionPaginationView({itemsPerPage: this.itemsPerPage});
-            this.contactCollectionPaginationView.on('page:change', this.onPageChanged, this);
-
-            this.registerSubViews(this.contactCollectionPaginationView);
+            this.listenTo(this.contactCollectionPaginationView, 'page:change', () => this.onPageChanged());
 
             this.collection = new ContactCollection();
             this.onPageChanged({number: 1}, {silent: true}); // Fetch emulation
-            this.collection.on('update', () => this.onPageChanged());
+            this.listenTo(this.collection, 'update', () => this.onPageChanged());
         },
 
         onPageChanged: function (page, opts) {

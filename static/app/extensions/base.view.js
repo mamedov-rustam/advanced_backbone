@@ -12,6 +12,7 @@ define(function (require) {
         constructor() {
             this._subViews = [];
             Backbone.View.apply(this, arguments);
+            this.listenTo(this.model, 'destroy', () => this.remove());
         },
 
         renderData() {
@@ -36,9 +37,9 @@ define(function (require) {
             opts = opts || {};
 
             if (!opts.silent) {
-                this._removeSubViews();
                 this.trigger('remove');
             }
+            this._removeSubViews();
 
             Backbone.View.prototype.remove.apply(this, arguments);
         },
@@ -55,7 +56,7 @@ define(function (require) {
 
         _addOneToSubViews(view) {
             this._subViews.push(view);
-            view.on('remove', () => _remove(this._subViews, view), this);
+            this.listenTo(view, 'remove', () => _remove(this._subViews, view));
         },
 
         _removeSubViews() {
