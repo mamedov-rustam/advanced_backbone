@@ -12,7 +12,7 @@ define(function (require) {
         constructor() {
             this._subViews = [];
             Backbone.View.apply(this, arguments);
-            this.listenTo(this.model, 'destroy', () => this.remove());
+            this.listenTo(this.model, 'destroy', this.remove);
         },
 
         renderData() {
